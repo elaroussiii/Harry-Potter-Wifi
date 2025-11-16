@@ -1,0 +1,455 @@
+/* ===== variables ===== */
+:root{
+  --bg:#0b0f14;
+  --text:#e6eef7;
+  --muted:#9fb1c7;
+  --accent:#6b1f6b;
+  --gold:#a3874a;
+  --maxw:1200px;
+
+  --hero-url:url('https://static.wikia.nocookie.net/harrypotter/images/b/b5/Site-background-light/revision/latest/scale-to-width-down/2000?cb=20221229145542');
+
+  --header-h:70px;
+  --sidebar-w:80px;
+}
+
+/* ===== base ===== */
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:Inter,system-ui,Segoe UI,Roboto,Arial;
+  background:var(--bg);
+  color:var(--text);
+  padding-top:var(--header-h);
+}
+
+.container{
+  max-width:var(--maxw);
+  margin:0 auto;
+  padding:0 20px;
+}
+
+a{color:#2a64ff;text-decoration:underline}
+img{max-width:100%;display:block;height:auto}
+
+/* ===== header ===== */
+.global-header{
+  position:fixed;
+  top:0; left:0; right:0;
+  z-index:1000;
+  background:#fff;
+  border-bottom:1px solid #e6ebf2;
+  color:#111;
+}
+
+.gh-row{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  padding:12px 20px;
+}
+
+.gh-brand img{height:28px}
+
+.gh-search{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-left:auto;
+  min-width:320px;
+  background:#fff;
+  border:1px solid #cfd6df;
+  border-radius:10px;
+  padding:4px 6px;
+}
+
+.gh-search input{
+  border:0;
+  outline:none;
+  width:100%;
+  background:transparent;
+  color:#111;
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:8px 14px;
+  border-radius:10px;
+  font-weight:700;
+}
+
+.btn.ghost{
+  border:1px solid #cfd6df;
+  color:#111;
+  background:#fff;
+}
+
+.btn.primary{
+  background:var(--accent);
+  color:#fff;
+}
+
+/* ===== Barre latérale ===== */
+.sidebar {
+  position: fixed;
+  top: 0; /* ÉTAIT : var(--header-h) → maintenant collé en haut */
+  left: 0;
+  width: var(--sidebar-w);
+  bottom: 0;
+  background: #f5f6f7;
+  border-right: 1px solid #dce1e8;
+
+  /* On descend le contenu pour qu’il ne passe pas sous le header */
+  padding-top: calc(var(--header-h) + 20px);
+
+  z-index: 900;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+}
+
+
+/* Centrer menu + explore + recent */
+.sidebar .item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: #000 !important;     /* texte en noir */
+  font-weight: 600;
+}
+
+/* Icônes Menu + Explore */
+.sidebar .icon {
+  width: 28px;       /* un peu plus grand */
+  height: 28px;
+  opacity: .9;
+}
+
+/* TITRE RECENT */
+.sidebar .item[style] {
+  color: #000 !important;
+  font-size: 14px;
+  letter-spacing: .5px;
+}
+
+
+/* ===== HERO ===== */
+.hero{
+  position:relative;
+  overflow:hidden;
+  min-height:calc(100vh - var(--header-h));
+  margin-left:var(--sidebar-w);
+}
+
+.hero-backdrop{height:0}
+
+.hero::before{
+  content:"";
+  position:fixed;
+  top: 0;
+  left:var(--sidebar-w);
+  right:0;
+  bottom:0;
+  background:var(--hero-url) center/cover no-repeat;
+  z-index:-1;
+  filter:brightness(.9);
+}
+
+.hero::after{
+  content:"";
+  position:fixed;
+  top: 0;
+  left:var(--sidebar-w);
+  right:0;
+  bottom:0;
+  background:rgba(0,0,0,.35);
+  z-index:-1;
+}
+
+
+/* HERO BAR — EXACT FANDOM STYLE */
+
+
+.hero-bar {
+  position: absolute;
+  bottom: 60px; 
+  left: calc(var(--sidebar-w) + 15px);
+  right: 60px;
+
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
+
+  z-index: 50;
+}
+
+
+/* ---- GAUCHE ---- */
+.hero-left {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.hero-left h1 {
+  font-size: 38px;
+  font-weight: 700;
+  margin: 0;
+  color: white;
+  text-shadow: 0 3px 12px rgba(0,0,0,0.6);
+}
+
+.wiki-banner {
+  height: 72px;
+  width: auto;
+  filter: drop-shadow(0 3px 8px rgba(0,0,0,0.5));
+}
+
+/* ---- CENTRE : MENU ---- */
+.hero-menu {
+  display: flex;
+  gap: 32px;
+}
+
+.hero-menu a {
+  color: white;
+  font-weight: 700;
+  font-size: 17px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  text-shadow: 0 2px 8px rgba(0,0,0,.6);
+}
+
+.hero-menu a:hover {
+  opacity: 0.85;
+}
+
+/* ---- DROITE ---- */
+.hero-right {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+/* STATS */
+.stats-box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  color: white;
+  text-shadow: 0 3px 10px rgba(0,0,0,0.65);
+}
+
+.stats-box strong {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.stats-box span {
+  font-size: 13px;
+  margin-top: -4px;
+  text-transform: uppercase;
+}
+
+/* ICONES */
+.hero-icons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.hero-icons img {
+  width: 34px;
+  height: 34px;
+  padding: 6px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.22);
+  backdrop-filter: blur(4px);
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.hero-icons img:hover {
+  background: rgba(255,255,255,0.35);
+  transform: scale(1.1);
+}
+
+/* ===== panel ===== */
+.panel{
+  margin-top:-50px;
+  margin-left:var(--sidebar-w);
+  display:flex;
+  justify-content:center;
+  position:relative;
+  z-index:1;
+}
+
+.panel-grid{
+  width:1100px;
+  max-width:90%;
+  transform:scale(0.96);
+  transform-origin:top center;
+  display:grid;
+  grid-template-columns:1fr 420px;
+  gap:40px;
+  align-items:start;
+  background:linear-gradient(180deg,rgba(255,255,255,.97),rgba(255,255,255,.92));
+  color:#2a2a2a;
+  border-radius:18px;
+  border:1px solid #e5e9f2;
+  padding:24px;
+  box-shadow:0 16px 40px rgba(0,0,0,.28);
+}
+
+/* Titre doré */
+.kicker{
+  margin:0 0 8px;
+  font-family:Cinzel,serif;
+  letter-spacing:.22em;
+  color:#8a7238;
+  font-size:18px;
+}
+
+.display{
+  font-family:Cinzel,serif;
+  color:#8a7238;
+  font-size:74px;
+  line-height:1.06;
+  margin:0 0 22px;
+}
+
+/* intro texte */
+.intro-text{
+  color:#2f2f2f;
+  font-size:14px;
+  line-height:1.85;
+}
+
+.intro-text .lead{
+  font-weight:600;
+  margin:0 0 14px;
+}
+
+.hl-figure{
+  margin:0 0 16px 28px;
+  float:right;
+}
+
+.hl-figure img{
+  width: 300px;
+  max-width:42vw;
+  border:1px solid #e5e9f2;
+  box-shadow:0 10px 26px rgba(0,0,0,.22);
+}
+
+
+/* ===== ABOUT (bloc doré droite) ===== */
+
+
+/* ===== ABOUT (style texte Fandom) ===== */
+.about{
+  background:#9c8245;        /* Or Fandom */
+  color:#fffef5;             /* Texte général en blanc cassé */
+  padding:38px 28px;
+  border:1px solid rgba(0,0,0,.08);
+  line-height:1.70;
+  box-shadow:0 4px 14px rgba(0,0,0,.18);
+
+  max-width: 360px;
+  width: 100%;
+  min-height: 540px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 20px;
+}
+
+/* Titre en noir */
+.about h3{
+  font-family:Cinzel,serif;
+  margin:0;
+  margin-bottom: 8px;
+  font-size: 28px;
+  letter-spacing: .18em;
+  text-align:center;
+  color:#ffffff;
+}
+
+/* Paragraphes : blanc cassé */
+.about p{
+  margin:0;
+  font-size:16px;
+  color:#fffef5;  /* texte blanc */
+}
+
+/* Liens en NOIR (comme le modèle) */
+.about a{
+  color:#1b1205;
+  font-weight:700;
+  text-decoration: underline;
+}
+
+/* Bloc liens en bas */
+.about-links{
+  text-align:center;
+  margin-top:auto;
+  padding-top: 14px;
+  font-weight:700;
+  font-size: 16px;
+  border-top: 1px solid rgba(255,255,255,.4);
+}
+
+/* Espace entre colonnes */
+.panel-grid{
+  grid-template-columns: 1fr 380px !important;
+  gap: 55px !important;
+}
+
+
+
+/* footer */
+.site-footer{
+  border-top:1px solid #1f2a38;
+  background:#0b0f14;
+  padding:20px 0;
+  margin-top:8px;
+}
+
+.footer-wrap{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.footer-nav{
+  display:flex;
+  gap:14px;
+}
+
+.muted{color:#9fb1c7}
+
+/* responsive */
+@media (max-width:1200px){
+  .hl-figure img{width:460px}
+}
+
+@media (max-width:1024px){
+  .display{font-size:58px}
+  .panel-grid{grid-template-columns:1fr}
+  .hl-figure{float:none;margin:0}
+  .hl-figure img{width:100%}
+}
+
+@media (max-width:760px){
+  .gh-search{display:none}
+  .display{font-size:40px}
+}
