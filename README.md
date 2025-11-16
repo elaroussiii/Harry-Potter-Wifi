@@ -21,4 +21,3 @@ L’objectif était de recréer la mise en page, la barre latérale, l’en-têt
 - Panel blanc en deux colonnes  
 - Bloc "About Us" reproduit  
 - Mise en page responsive simple
->>>>>>> d3004eb (Ajout du README)
